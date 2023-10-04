@@ -13,14 +13,29 @@ class ImcPage extends StatefulWidget {
 }
 
 class _ImcPageState extends State<ImcPage> {
+  late ImcRepository imcRepository;
   var imcModel = ImcModel.vazio();
   // variáveis usadas nessa tela
-  TextEditingController nomeController = TextEditingController();
-  TextEditingController alturaController = TextEditingController();
-  TextEditingController pesoController = TextEditingController();
+    TextEditingController nomeController = TextEditingController();
+    TextEditingController alturaController = TextEditingController();
+    TextEditingController pesoController = TextEditingController();
 
   //Área principal
   @override
+  void initState() {
+    super.initState();
+    carregarDados();
+  }
+
+  carregarDados() async {
+    imcRepository = await ImcRepository.carregar();
+    imcModel = imcRepository.obterDados();
+    nomeController.text = imcModel.nome;
+    alturaController.text = imcModel.altura.toString();
+    pesoController.text = imcModel.peso.toString();
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -222,7 +237,7 @@ class _ImcPageState extends State<ImcPage> {
                         imcModel.nome = (nomeController.text);
                         imcModel.altura = double.parse(alturaController.text);
                         imcModel.peso = double.parse(pesoController.text);
-                  //      ImcRepository.salvar(ImcModel);
+                        ImcRepository.salvar(imcModel);
                         double imcCalculado = funcCalculaIMC(imcModel.peso, imcModel.altura);
                         var imcFormatado = imcCalculado.toStringAsFixed(2);
                         String imcSignificado = mostrarIMC(imcCalculado);

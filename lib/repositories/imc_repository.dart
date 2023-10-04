@@ -16,7 +16,7 @@ class ImcRepository {
     return ImcRepository._criar();
   }
 
- salvar(ImcModel imcModel) {
+  ImcRepository.salvar(ImcModel imcModel) {
     _box.put(
       'imcModel', {
         'nome' : imcModel.nome,
