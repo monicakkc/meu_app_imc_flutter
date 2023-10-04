@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Getting Started
 
-# 💎 Repo for practicing Dart 💎
+# 💎 Repo for practicing Dart / Flutter 💎
 
 
 👀  I'm here to improve my skills ...
